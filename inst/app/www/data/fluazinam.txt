@@ -1,0 +1,14 @@
+3.8	3.8	Tubifex sp.	Oligochaeta
+33.6	33.6	Dugesia sp.	Tricladida
+87	87	Polycelis nigra/tenuis	Tricladida
+1700	NA	Sphaerium sp.	Mollusca
+640	640	Physa fontinalis	Mollusca
+1155	NA	Erpobdella  sp. (juv.)	Hirudinea
+113	113	Asellus aquaticus	Macrocrustacea
+129	129	Gammarus pulex	Macrocrustacea
+586	586	Proasellus coxalis	Macrocrustacea
+1856	NA	Cloeon dipterum	Insecta
+1.6	1.6	Brachionus calyciﬂorus	Rotifera
+4.8	4.8	Acanthocyclops venustus	Copepoda
+82	82	Daphnia group galeata	Cladocera
+155	155	Daphnia magna	Cladocera

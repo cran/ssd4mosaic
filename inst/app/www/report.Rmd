@@ -1,0 +1,148 @@
+---
+title: "MOSAIC~SSD~ report"
+output: html_document
+date: "`r format(Sys.time(), '%a %b %d %Y | %H:%M:%S (%Z)')`"
+params:
+  title: "Data-name"
+  unit: "Arbitrary unit"
+  distributions: "lnorm"
+  censored: F
+  data: NULL
+  fits: NULL
+  bts: NULL
+  ok_bts: TRUE
+  CI.level: 0.95
+  logscale: TRUE
+  use_names: FALSE
+  use_groups: FALSE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+label <- params$use_groups || params$use_names
+library(ssd4mosaic)
+
+# group plots require adjustable height in case there is a lot of labels
+group_plot_height <- ifelse(params$use_groups,
+                            6.5 + 0.1575 * (length(unique(params$data$group)) %/% 5),
+                            5)
+```
+This report is provided by the MOSAIC~SSD~ application available at: 
+<https://mosaic.univ-lyon1.fr/ssd>
+
+Contact: <sandrine.charles@univ-lyon1.fr>
+
+MOSAIC~SSD~ is a web tool allowing easy Species Sensitivity Distribution
+analyses based on pointwise or censored toxicity data. It is powered by the
+[R](http://www.r-project.org/) software and in particular the `Shiny` package,
+as well as the `fitdistrplus` and `ssd4mosaic` packages.
+
+```{r, results ='asis'}
+cat("# Dataset: ", paste0("*",params$title, "*"))
+cat("\n Confidence intervals level: ", params$CI.level)
+```
+
+* Estimated distribution
+```{asis, echo = label}
+* Label display
+```
+* Estimated hazardous concentration
+* R script
+
+# Estimated distributions
+```{asis, echo = !params$ok_bts}
+**The bootstrap procedure did not converge, the confidence intervals are 
+displayed but may not be accurate!**
+```
+
+```{r CI base plot}
+p <- base_cdf(params$fits, unit = params$unit, logscale = params$logscale)
+add_CI_plot(p, params$bts, params$logscale, CI.level = params$CI.level)
+```
+
+```{r, results='asis'}
+# cat(ssd4mosaic:::get_parameters_html(bootstrap = params$bts))
+out <- list()
+for (bts in params$bts){
+  CI <- if(params$CI.level == 0.9) {
+    CI <- bts$CI90
+  } else {
+    CI <- bts$CI
+  }
+    out[[length(out) + 1]] <- paste0(
+      "**",
+      ifelse(bts$fitpart$distname == "lnorm",
+             "Log normal distribution",
+             "Log logistic distribution"
+      ),
+      "**
+
+*(log-likelihood = ",
+      round(bts$fitpart$loglik, digits = 1),
+      ")*
+
+",
+      names(bts$fitpart$estimate[1]), ": ",
+      round(CI[1, 1], digits = 1),
+      " [ ", round(CI[1, 2], digits = 1), " ; ",
+      round(CI[1, 3], digits = 1), " ]
+
+",
+      names(bts$fitpart$estimate[2]), ": ",
+      round(CI[2, 1], digits = 1),
+      " [ ", round(CI[2, 2], digits = 1), " ; ",
+      round(CI[2, 3], digits = 1), " ]
+
+"
+    )
+}
+cat(unlist(out))
+```
+
+```{asis, echo = label}
+# Label display
+```
+```{r CI label plots I}
+if (params$use_names) {
+  p <- options_plot(params$fits, params$unit, params$logscale, params$data,
+               use_names = TRUE)
+  add_CI_plot(p, params$bts, params$logscale, CI.level = params$CI.level)
+}
+```
+
+
+```{r CI label plots II, fig.height= group_plot_height}
+
+if (params$use_groups) {
+  p <- options_plot(params$fits, params$unit, params$logscale, params$data,
+               use_groups = TRUE)
+  add_CI_plot(p, params$bts, params$logscale, CI.level = params$CI.level)
+}
+```
+
+# Estimated hazardous concentration
+```{asis, echo = !params$ok_bts}
+**The bootstrap procedure did not converge, the confidence intervals are 
+displayed but may not be accurate!**
+```
+
+```{r HCx, results='asis'}
+knitr::kable(
+  ssd4mosaic:::get_HCx_table(params$fits, params$distributions, params$bts, CI.level = params$CI.level)
+  )
+```
+
+# R script
+```{r script, comment=""}
+cat(ssd4mosaic:::code_r_ssd(params$data, params$distributions, params$censored,
+                        logscale = params$logscale, names = params$use_names,
+                        groups = params$use_groups, CI.level = params$CI.level))
+```
+
+# Dataset content
+```{r data content, results='asis'}
+knitr::kable(
+  params$data
+  )
+```
+

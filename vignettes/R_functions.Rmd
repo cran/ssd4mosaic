@@ -1,0 +1,72 @@
+---
+title: "Using ssd4mosaic's functions in R"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using ssd4mosaic's functions in R}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE,
+  fig.width = 5,
+  fig.height = 4
+)
+```
+
+```{r setup, eval = TRUE}
+library(ssd4mosaic)
+```
+
+When using the MOSAIC SSD web application, a code is provided after each
+analysis to reproduce the same results directly in R. Here is an example of
+censored data species sensitivity distribution analysis using `{ssd4mosaic}`
+functions.
+
+## Defining the inputs
+```{r data_setup, eval = TRUE}
+# Data creation
+# Most often, you would archive the same result by reading a table file with a
+# function akin to utils::read.delim()
+data <- ssd4mosaic::fluazinam
+
+# Which distribution to fit to the data.
+# See get_fits function documentation for possible options
+distributions <- list("lnorm")
+# Whether to display the results plots with a logscale x-axis
+logscale <- TRUE
+# Concentration unit for plots labels
+unit <- "\u03bcg/L"
+```
+
+## Fitting to the data
+```{r fitting, eval = TRUE}
+## model fitting
+fits <- ssd4mosaic::get_fits(data, distributions, TRUE)
+
+## bootstrapping
+bts <- ssd4mosaic::get_bootstrap(fits)[[1]]
+```
+
+## Extracting information from the fit
+```{r fit_info, eval = TRUE}
+## Model parameters
+lapply(fits, summary)
+
+## HCx values
+lapply(bts, quantile, probs = c(0.05, 0.1, 0.2, 0.5))
+```
+
+```{r plots, eval = FALSE}
+## CDF plot with confidence intervals
+p <- ssd4mosaic::base_cdf(fits, unit = unit, logscale = logscale)
+ssd4mosaic::add_CI_plot(p, bts, logscale)
+## CDF plot with species names
+ssd4mosaic::options_plot(fits, unit, logscale, data, use_names = TRUE)
+## CDF plot colored by group
+ssd4mosaic::options_plot(fits, unit, logscale, data, use_groups = TRUE)
+```
+

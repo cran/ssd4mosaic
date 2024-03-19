@@ -1,0 +1,51 @@
+---
+title: "Getting started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+## Installing {ssd4mosaic}
+
+You can install the stable version of `{ssd4mosaic}` from CRAN:
+
+``` {r}
+install.packages("ssd4mosaic")
+```
+
+
+The development version of `{ssd4mosaic}` can be installed from GitHub using the
+`{remotes}` package: 
+
+```{r}
+remotes::install_gitlab("mosaic-software/mosaic-ssd@master",
+                        host = "gitlab.in2p3.fr",
+                        build_vignettes = TRUE)
+```
+
+## Launching the web application
+
+The web application can be launched locally using the `run_app()` function. This
+will launch the same application as what can be seen on the
+[MOSAIC website](https://mosaic.univ-lyon1.fr/ssd).
+
+```{r setup}
+library(ssd4mosaic)
+run_app()
+```
+
+A user guide is available directly in the application for further instructions.
+
+If you are interested in using the functionalities of the SSD web application
+directly in R, you may want to check the dedicated vignette, "Using ssd4mosaic's
+functions in R".

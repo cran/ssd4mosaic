@@ -17,7 +17,7 @@ A data frame with 14 rows and 4 columns:
 }
 }
 \source{
-\url{https://pubmed.ncbi.nlm.nih.gov/19837458/}
+\doi{10.1016/j.ecoenv.2009.09.019 }
 }
 \usage{
 fluazinam

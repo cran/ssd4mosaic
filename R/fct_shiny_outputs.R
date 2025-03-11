@@ -122,6 +122,44 @@ get_HCx_table <- function(fits, distributions, bootstrap = NULL, CI.level = 0.95
   as.data.frame(quantCI)
 }
 
+#' Get HCx values for a given x from a bootstrap
+#'
+#' Get HCx corresponding to the provided x for each fit provided with confidence
+#' intervals
+#'
+#' @inheritParams base_cdf
+#' @inheritParams get_fits
+#' @inheritParams get_parameters_html
+#'
+#' @param x An integer between 0 and 100.The percent of the hazardous
+#' concentration desired (HCx).
+#'
+#' @return A string describing the HCx and its confidence interval for each
+#' distribution.
+get_custom_HCx <- function(x, distributions, bootstrap = NULL, CI.level = 0.95) {
+  # Bootstrap is not done
+  if (is.null(bootstrap)) {
+    return()
+  }
+  # Bootstrap is done
+  quantCI <- lapply(bootstrap, stats::quantile, probs = x/100,
+                    CI.level = CI.level)
+
+  quant_med <- lapply(quantCI, "[[", "quantiles")
+  quant_med <- lapply(quant_med, round, digits = 2)
+  quant_med <- lapply(quant_med, format, nsmall = 2)
+  quant_med <- lapply(quant_med, unlist)
+
+  quantCI <- lapply(quantCI, "[[", "quantCI")
+  quantCI <- lapply(quantCI, round, digits = 2)
+  quantCI <- lapply(quantCI, format, nsmall = 2)
+  f <- function(x) apply(x, MARGIN = 2, paste, collapse = " ; ")
+  quantCI <- lapply(quantCI, f)
+  quantCI <- paste(quant_med, " [ ", quantCI, " ]", sep = "")
+
+  paste0(distributions,": ", quantCI, collapse = "\n")
+}
+
 render_report <- function(input, output_format, output, params) {
   suppressWarnings(
     rmarkdown::render(input,

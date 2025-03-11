@@ -13,7 +13,7 @@
 #'   arthropod.}
 #' }
 #'
-#' @source \url{https://pubmed.ncbi.nlm.nih.gov/15499502/}
+#' @source \doi{10.1007/s00244-003-3212-5}
 "endosulfan"
 
 #' 48-hour acute toxicity values for fluazinam
@@ -32,7 +32,7 @@
 #'   taxonomic rank.}
 #' }
 #'
-#' @source \url{https://pubmed.ncbi.nlm.nih.gov/19837458/}
+#' @source \doi{10.1016/j.ecoenv.2009.09.019 }
 #'
 "fluazinam"
 
@@ -50,7 +50,7 @@
 #'   \item{group}{Order of each tested specie.}
 #' }
 #'
-#' @source \url{https://cdnsciencepub.com/doi/abs/10.1139/f06-080}
+#' @source \doi{10.1139/f06-080}
 "salinity_order"
 
 #' 72-hour acute salinity tolerance of macro-invertebrates grouped by family.
@@ -67,5 +67,5 @@
 #'   \item{group}{Family of each tested specie.}
 #' }
 #'
-#' @source \url{https://cdnsciencepub.com/doi/abs/10.1139/f06-080}
+#' @source \doi{10.1139/f06-080}
 "salinity_family"

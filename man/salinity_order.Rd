@@ -15,7 +15,7 @@ A data frame with 108 rows and 3 columns:
 }
 }
 \source{
-\url{https://cdnsciencepub.com/doi/abs/10.1139/f06-080}
+\doi{10.1139/f06-080}
 }
 \usage{
 salinity_order

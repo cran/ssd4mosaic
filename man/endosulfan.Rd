@@ -16,7 +16,7 @@ A data frame with 88 rows and 3 columns:
 }
 }
 \source{
-\url{https://pubmed.ncbi.nlm.nih.gov/15499502/}
+\doi{10.1007/s00244-003-3212-5}
 }
 \usage{
 endosulfan

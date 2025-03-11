@@ -6,14 +6,14 @@ knitr::opts_chunk$set(
 )
 
 ## -----------------------------------------------------------------------------
-#  install.packages("ssd4mosaic")
+# install.packages("ssd4mosaic")
 
 ## -----------------------------------------------------------------------------
-#  remotes::install_gitlab("mosaic-software/mosaic-ssd@master",
-#                          host = "gitlab.in2p3.fr",
-#                          build_vignettes = TRUE)
+# remotes::install_gitlab("mosaic-software/mosaic-ssd@master",
+#                         host = "gitlab.in2p3.fr",
+#                         build_vignettes = TRUE)
 
 ## ----setup--------------------------------------------------------------------
-#  library(ssd4mosaic)
-#  run_app()
+# library(ssd4mosaic)
+# run_app()
 

@@ -1,8 +1,10 @@
 Package: ssd4mosaic
 Title: Web Application for the SSD Module of the MOSAIC Platform
-Version: 1.0.1
+Version: 1.0.3
 Authors@R: c(
-    person("Milena", "Kaag", , "milena.kaag@univ-lyon1.fr", role = c("cre", "aut")),
+    person("Aurélie", "Siberchicot", , "aurelie.siberchicot@univ-lyon1.fr", role = c("cre", "aut"),
+           comment = c(ORCID = "0000-0002-7638-8318")),
+    person("Milena", "Kaag", , "milena.kaag.pro@gmail.com", role = "aut"),
     person("Sandrine", "Charles", , "sandrine.charles@univ-lyon1.fr", role = "aut",
            comment = c(ORCID = "0000-0003-4604-0166")),
     person("UMR5558 LBBE MEPS", role = c("cph", "fnd")),
@@ -31,13 +33,15 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 NeedsCompilation: no
-Packaged: 2024-03-18 14:28:40 UTC; milenakaag
-Author: Milena Kaag [cre, aut],
+Packaged: 2025-03-11 08:42:18 UTC; siberchicot
+Author: Aurélie Siberchicot [cre, aut]
+    (<https://orcid.org/0000-0002-7638-8318>),
+  Milena Kaag [aut],
   Sandrine Charles [aut] (<https://orcid.org/0000-0003-4604-0166>),
   UMR5558 LBBE MEPS [cph, fnd],
   rhandsontable contributors [ctb, cph] (For my_rhandsontable function)
-Maintainer: Milena Kaag <milena.kaag@univ-lyon1.fr>
+Maintainer: Aurélie Siberchicot <aurelie.siberchicot@univ-lyon1.fr>
 Repository: CRAN
-Date/Publication: 2024-03-19 20:10:02 UTC
+Date/Publication: 2025-03-11 14:40:02 UTC

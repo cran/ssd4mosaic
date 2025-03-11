@@ -55,6 +55,7 @@ app_server <- function(input, output, session) {
   #### fetch and modify uploaded file ####
   observe({
     if (!is.null(input$loadFile)) {
+
       name <- input$loadFile$name
       extension <- unlist(strsplit(name, "[.]"))
       extension <- extension[length(extension)]
@@ -359,6 +360,13 @@ app_server <- function(input, output, session) {
                   as.numeric(input$CIlevel))
   }, rownames = TRUE, width = "100%")
   outputOptions(output, "HCx", suspendWhenHidden = FALSE)
+
+  output$customHCx_output <- renderText({
+    if(is.null(variables$fits))
+      return()
+    get_custom_HCx(input$customHCx, variables$distributions,
+                   variables$bts, as.numeric(input$CIlevel))
+  })
 
    output$codeR <- renderPrint({
      if(is.null(variables$fits))

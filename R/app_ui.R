@@ -113,14 +113,11 @@ app_ui <- function(request) {
                                    wellPanel( style = "border-top-style: none;",
                                               div(style = "float:right;",
                                                   mod_infobutton_ui("infobutton_data"),
-                                                  tags$label(class = "input-group-prepend",
-                                                             tags$span(class = "btn btn-default btn-file smallButton",
-                                                                       "Load from file",
-                                                                       tags$input(id = "loadFile", name = "loadFile", type = "file",
-                                                                                  style = "position: absolute !important; top: -99999px !important; left: -99999px !important;",
-                                                                                  class = "shiny-bound-input")
-                                                                       )
-                                                             ),
+                                                  tags$label(`for` = "loadFile",
+                                                    tags$span(class = "btn btn-default btn-file smallButton",
+                                                              "Load from file")),
+                                                  tags$input(id = "loadFile", name = "loadFile", type = "file",
+                                                             style = "position: absolute !important; top: -99999px !important; left: -99999px !important;"),
                                                   actionButton("open_example", label = "Try with an example", class = "smallButton"),
                                                   actionButton("reset", label = "Reset", class = "smallButton",
                                                                onclick = "Shiny.setInputValue('first_plot_done', null);")
@@ -238,7 +235,10 @@ app_ui <- function(request) {
                                                                                    wellPanel(style = "justify-content: center;",
                                                                                              # may need further centering with real values table
                                                                                              tableOutput("HCx")
-                                                                                   )
+                                                                                   ),
+                                                                                   numericInput("customHCx", label = "Get custom HCx", value = 1,
+                                                                                                min = 0, max = 100),
+                                                                                   verbatimTextOutput("customHCx_output")
                                                                          )
                                                                 )
                                                               ),

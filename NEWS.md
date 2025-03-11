@@ -1,3 +1,13 @@
+# ssd4mosaic 1.0.2
+
+## Bug fixes
+
+* Fix Upload file button in the shiny application.
+
+## New features
+
+* Add the option to compute Hazardous Concentrations (HC) for any x% value.
+
 # ssd4mosaic 1.0.1
 
 ## Enhancements

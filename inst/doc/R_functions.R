@@ -39,11 +39,11 @@ lapply(fits, summary)
 lapply(bts, quantile, probs = c(0.05, 0.1, 0.2, 0.5))
 
 ## ----plots, eval = FALSE------------------------------------------------------
-#  ## CDF plot with confidence intervals
-#  p <- ssd4mosaic::base_cdf(fits, unit = unit, logscale = logscale)
-#  ssd4mosaic::add_CI_plot(p, bts, logscale)
-#  ## CDF plot with species names
-#  ssd4mosaic::options_plot(fits, unit, logscale, data, use_names = TRUE)
-#  ## CDF plot colored by group
-#  ssd4mosaic::options_plot(fits, unit, logscale, data, use_groups = TRUE)
+# ## CDF plot with confidence intervals
+# p <- ssd4mosaic::base_cdf(fits, unit = unit, logscale = logscale)
+# ssd4mosaic::add_CI_plot(p, bts, logscale)
+# ## CDF plot with species names
+# ssd4mosaic::options_plot(fits, unit, logscale, data, use_names = TRUE)
+# ## CDF plot colored by group
+# ssd4mosaic::options_plot(fits, unit, logscale, data, use_groups = TRUE)
 
